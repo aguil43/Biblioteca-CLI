@@ -1,3 +1,5 @@
+#include "src/include/cli.h"
+#include "src/include/search.h"
 #include <iostream> // Importar libreria para herramientas basicas entrada y salida
 using namespace std; // No tener que escribir std:: antes de cada instruccion de la libreria
 
@@ -10,10 +12,9 @@ bool auth = false;
 void logout();
 void login();
 void signin();
-void clean();
 
 int main() {
-    clean();
+    clear();
     if(user == ""){
         signin();
     }
@@ -40,10 +41,14 @@ int main() {
         // Llamar a la funcion para los registros
         break;
     case 2:
-        // Llamar a la funcion para buscar en los libros
+        if(auth){
+            showMenu();
+        }else{
+            login();
+        }
         break;
     case 3:
-        clean();
+        clear();
         signin();
         break;
     case 4:
@@ -54,7 +59,7 @@ int main() {
         logout();
         break;
     default:
-        clean();
+        clear();
         cout << "Opcion no valida";
         main();
         break;
@@ -63,17 +68,13 @@ int main() {
     main();
 }
 
-void clean(){
-    system("cls");
-}
-
 void signin(){
     cout << "Ingresa el nombre de usuario:" << endl;
     cin >> user;
     cout << "Ingresa la password:" << endl;
     cin >> passwd;
 
-    clean();
+    clear();
 
     cout << "Credenciales almacenadas correctamente.";
     auth = true;
@@ -93,7 +94,7 @@ void login(){
         auth = true;
         main();
     }else{
-        clean();
+        clear();
         cout << "credenciales incorrectas";
         login();
     }
